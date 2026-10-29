@@ -1,0 +1,11 @@
+//makefile
+a.out: main.o convert.o priority.o stack.o
+        gcc main.o convert.o priority.o stack.o
+main.o : main.c
+        gcc -c main.c
+convert.o: convert.c
+        gcc -c convert.c
+priority.o : priority.c
+        gcc -c priority.c
+stack.o : stack.c
+        gcc -c stack.c
