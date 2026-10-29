@@ -1,0 +1,17 @@
+//main.c
+#include "header.h"
+
+int main()
+{
+    char infix[100];
+    char postfix[100];
+
+    printf("Enter Infix Expression: ");
+    scanf("%99s", infix);
+
+    convert(infix, postfix);
+
+    printf("Postfix Expression: %s\n", postfix);
+
+    return 0;
+}

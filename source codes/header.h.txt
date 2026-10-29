@@ -1,0 +1,13 @@
+//header.h
+#include <stdio.h>
+
+extern char stack[100];
+extern int top;
+
+void push(char ch);
+char pop();
+char peek();
+
+int priority(char ch);
+int isoperator(char ch);
+void convert(char infix[],char postfix[]);

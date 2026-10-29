@@ -1,0 +1,78 @@
+//convert.c
+#include "header.h"
+
+void convert(char infix[], char postfix[])
+{
+    int i;
+    int j = 0;
+    char ch;
+
+    top = -1;
+
+    for(i = 0; infix[i] != '\0'; i++)
+    {
+        ch = infix[i];
+
+        // Operand
+        if((ch >= 'A' && ch <= 'Z') ||
+           (ch >= 'a' && ch <= 'z') ||
+           (ch >= '0' && ch <= '9'))
+        {
+            postfix[j] = ch;
+            j++;
+        }
+
+        // Opening parenthesis
+        else if(ch == '(')
+        {
+            push(ch);
+        }
+
+        // Closing parenthesis
+        else if(ch == ')')
+        {
+            while(top != -1 && peek() != '(')
+            {
+                postfix[j] = pop();
+                j++;
+            }
+
+            if(top != -1)
+                pop();
+        }
+
+        // Operator
+        else if(isoperator(ch))
+        {
+            while(top != -1 && peek() != '(')
+            {
+                if(priority(peek()) > priority(ch))
+                {
+                    postfix[j] = pop();
+                    j++;
+                }
+                else if(priority(peek()) == priority(ch)
+                        && ch != '^')
+                {
+                    postfix[j] = pop();
+                    j++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            push(ch);
+        }
+    }
+
+    // Pop remaining operators
+    while(top != -1)
+    {
+        postfix[j] = pop();
+        j++;
+    }
+
+    postfix[j] = '\0';
+}
